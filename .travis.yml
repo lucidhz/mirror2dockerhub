@@ -5,9 +5,24 @@ language: bash
 services:
   - docker
 
+#cache:
+#  bundler: true
+#  directories:
+#  - $HOME/docker
+
 before_install:
   - docker version
 
 script:
-  - which bash && git remote -v 
-  - bash ./mirrorImages.sh
+  - which bash && git remote -v
+  - bash ./mirrorRancherImages.sh
+#  - bash ./mirrorImages.sh
+
+deploy:
+- provider: releases
+  api_key: ${github_api_key}
+  file: /tmp/pull_rancher_image.sh
+  skip_cleanup: true
+  on:
+    tags: true
+    condition: $DEPLOY_TO_GITHUB = true
