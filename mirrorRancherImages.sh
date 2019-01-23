@@ -7,7 +7,7 @@ DOCKER_PASSWORD=$(echo "${DOCKER_PASSWORD}" | base64 -d  | openssl des3 -d  -sal
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 cd /tmp
-wget -O ./t.sh https://github.com/rancher/rancher/releases/download/v2.1.3/rancher-mirror-to-rancher-org.sh
+wget -O ./t.sh https://github.com/rancher/rancher/releases/download/v2.1.5/rancher-mirror-to-rancher-org.sh
 
 awk '/(quay.io|gcr.io)/{print $0 }' ./t.sh | sed "s# rancher/# ${hubName}/rancher_#g" > ./t2.sh
 
@@ -37,5 +37,5 @@ cat /tmp/pull_rancher_image.sh
 
 
 #转存rancher开头镜像都转存私有库中
-echo " docker images 'rancher/*' | awk '{a=$1":"$2;b="docker:5000/"a; printf("docker tag %s %s\n docker push %s\ndocker rmi %s\n",a,b,b,b)}' " 
+# " docker images 'rancher/*' | awk '{a=$1":"$2;b="docker:5000/"a; printf("docker tag %s %s\n docker push %s\ndocker rmi %s\n",a,b,b,b)}' " 
 
