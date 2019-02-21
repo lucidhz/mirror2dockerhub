@@ -15,7 +15,8 @@ before_install:
 
 script:
   - which bash && git remote -v
-  - bash ./mirrorRancherImages.sh
+#  - bash ./mirrorRancherImages.sh
+  - bash ./mirrorImage4gitlab.sh
 #  - bash ./mirrorImages.sh
 
 deploy:

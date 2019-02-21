@@ -7,7 +7,7 @@ DOCKER_PASSWORD=$(echo "${DOCKER_PASSWORD}" | base64 -d  | openssl des3 -d  -sal
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 cd /tmp
-wget -O ./t.sh https://github.com/rancher/rancher/releases/download/v2.1.5/rancher-mirror-to-rancher-org.sh
+wget -O ./t.sh https://github.com/rancher/rancher/releases/download/v2.1.7/rancher-mirror-to-rancher-org.sh
 
 awk '/(quay.io|gcr.io)/{print $0 }' ./t.sh | sed "s# rancher/# ${hubName}/rancher_#g" > ./t2.sh
 
